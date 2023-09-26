@@ -1,17 +1,49 @@
-import image from '../assets/404Error.png'
-const images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-const Gallery = () => {
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import NotFound from "./NotFound";
+
+
+const Gallery = ({ loading, images, changeQuery, query}) => {
+    console.log("length", !images)
+    console.log("images", images)
+    const {search }= useParams();
+    console.log("params", search)
+    console.log("query}", query)
+
+    // useEffect(() => {
+    //     console.log("params inside", search)
+    // // if (search) changeQuery(search ? search : query)
+    // changeQuery(search)
+    // }, [search])
+    useEffect(() => {
+        console.log("params inside", search)
+    // if (search) changeQuery(search ? search : query)
+    if (search) {
+         changeQuery(search)
+    }
+   
+    },[search, changeQuery])
+
+console.log("gallery", images)
     return (
         <div className="photo-container">
-            <h2>Results</h2>
-            <ul>
-                {images.map((el, index) => (
-                    <li key={index}>
-                        <img src={image} alt="logo" />
-                    </li>
-                )
-                )}
-            </ul>
+            {loading ? (
+                <h2> Loading ... </h2>
+            ) : !loading && images?.length ? (
+                <>
+                    <h2>{search? search : query}</h2>
+                    <ul>
+                        {images.map((image) => (
+                            <li key={image.id}>
+                                <img src={`https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}_w.jpg`} alt={`${image.ttile}`} />
+                            </li>
+                        )
+                        )}
+                    </ul>
+                </>
+            ) : (
+                < NotFound title="No Results Found" info="You search did not return any results. Please try again." />
+            )}
         </div>
     )
 }
