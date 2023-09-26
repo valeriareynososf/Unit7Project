@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom'
+import Gallery from './components/Gallery';
+import SearchForm from "./components/SearchForm"
+import Nav from './components/Nav';
+import './index.css'
+
 
 function App() {
+  const [images, setImages] = useState([]);
+  const [query, setQuery] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // first
+
+    // return () => {
+    //   second
+    // }
+  }, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <SearchForm />
+      <Nav />
+
+      <Routes>
+        <Route path="/" element={null} />
+        <Route path="search">
+          <Route index element={null} />
+          <Route path=":search" element={null} />
+        </Route>
+      </Routes>
     </div>
   );
 }
