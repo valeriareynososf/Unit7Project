@@ -9,11 +9,8 @@ const Gallery = () => {
                     <li key={index}>
                         <img src={image} alt="logo" />
                     </li>
-
                 )
-
                 )}
-
             </ul>
         </div>
     )
