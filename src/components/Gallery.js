@@ -4,27 +4,15 @@ import NotFound from "./NotFound";
 
 
 const Gallery = ({ loading, images, changeQuery, query}) => {
-    console.log("length", !images)
-    console.log("images", images)
     const {search }= useParams();
-    console.log("params", search)
-    console.log("query}", query)
 
-    // useEffect(() => {
-    //     console.log("params inside", search)
-    // // if (search) changeQuery(search ? search : query)
-    // changeQuery(search)
-    // }, [search])
     useEffect(() => {
-        console.log("params inside", search)
-    // if (search) changeQuery(search ? search : query)
-    if (search) {
+    if (search !== query) {
          changeQuery(search)
-    }
-   
-    },[search, changeQuery])
+    }// eslint-disable-next-line
+    },[search])
 
-console.log("gallery", images)
+
     return (
         <div className="photo-container">
             {loading ? (
@@ -42,7 +30,7 @@ console.log("gallery", images)
                     </ul>
                 </>
             ) : (
-                < NotFound title="No Results Found" info="You search did not return any results. Please try again." />
+                < NotFound title="No Results Found" info="Your search did not return any results. Please try again." />
             )}
         </div>
     )
